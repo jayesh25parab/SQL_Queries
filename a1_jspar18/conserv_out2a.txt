@@ -1,0 +1,27 @@
+SQL> -- Add your code below
+SQL> --Sequence for Animal table 
+SQL> CREATE SEQUENCE animal_seq
+  START WITH 31
+  INCREMENT BY 1;
+
+Sequence ANIMAL_SEQ created.
+
+SQL> -- Sequence for Breeding_event table
+SQL> CREATE SEQUENCE breeding_event_seq
+  START WITH 11
+  INCREMENT BY 1;
+
+Sequence BREEDING_EVENT_SEQ created.
+
+SQL> --Sequence for Exchange table  
+SQL> CREATE SEQUENCE exchange_seq
+  START WITH 11
+  INCREMENT BY 1;
+
+Sequence EXCHANGE_SEQ created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set echo off

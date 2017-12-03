@@ -1,0 +1,133 @@
+1)  Transfer Query
+SQL> -- Add your code below
+SQL> -- INSERTING into EXCHANGE table
+SQL> INSERT INTO EXCHANGE 
+VALUES (exchange_seq.NEXTVAL,to_date('03-MAR-2014'),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME ='Kruger National Park'),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo'),
+000016,'B');
+
+1 row inserted.
+
+SQL> -- Updating Animal table
+SQL> UPDATE Animal SET 
+centre_id =(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo')
+WHERE animal_id = 000016;
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set echo off
+
+
+=========================================================================================================
+2) Breeding Query
+SQL> -- Add your code below
+SQL> -- INSERTING into Breeding_event table
+SQL> INSERT INTO BREEDING_EVENT
+VALUES (breeding_event_seq.NEXTVAL,to_date('01-Aug-2014'),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo'),
+000016,000009);
+
+1 row inserted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set echo off
+
+=========================================================================================================
+3) Offspring Query
+SQL> -- Add your code below
+SQL> -- INSERTING into Animal table
+SQL> INSERT INTO ANIMAL
+VALUES (ANIMAL_SEQ.NEXTVAL,'M',
+(SELECT BREVENT_ID FROM BREEDING_EVENT WHERE BREVENT_DATE = to_char('01-Aug-2014')),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo'),
+'Panthera','leo');
+
+1 row inserted.
+
+SQL> INSERT INTO ANIMAL
+VALUES (ANIMAL_SEQ.NEXTVAL,'M',
+(SELECT BREVENT_ID FROM BREEDING_EVENT WHERE BREVENT_DATE = to_char('01-Aug-2014')),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo'),
+'Panthera','leo');
+
+1 row inserted.
+
+SQL> INSERT INTO ANIMAL
+VALUES (ANIMAL_SEQ.NEXTVAL,'F',
+(SELECT BREVENT_ID FROM BREEDING_EVENT WHERE BREVENT_DATE = to_char('01-Aug-2014')),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo'),
+'Panthera','leo');
+
+1 row inserted.
+
+SQL> INSERT INTO ANIMAL
+VALUES (ANIMAL_SEQ.NEXTVAL,'F',
+(SELECT BREVENT_ID FROM BREEDING_EVENT WHERE BREVENT_DATE = to_char('01-Aug-2014')),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo'),
+'Panthera','leo');
+
+1 row inserted.
+
+SQL> INSERT INTO ANIMAL
+VALUES (ANIMAL_SEQ.NEXTVAL,'F',
+(SELECT BREVENT_ID FROM BREEDING_EVENT WHERE BREVENT_DATE = to_char('01-Aug-2014')),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo'),
+'Panthera','leo');
+
+1 row inserted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set echo off
+
+=====================================================================================================
+4) Transfer2 Query
+
+SQL> -- Add your code below
+SQL> -- INSERTING into EXCHANGE table
+SQL> INSERT INTO EXCHANGE 
+VALUES (exchange_seq.NEXTVAL,to_date('15-FEB-2015'),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME ='Werribee Open Range Zoo'),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Kruger National Park'),
+000016,'B');
+
+1 row inserted.
+
+SQL> -- Updating Animal table
+SQL> UPDATE Animal SET 
+centre_id =(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Kruger National Park')
+WHERE animal_id = 000016;
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set echo off
+=======================================================================================================
+5) RedList Query
+
+SQL> -- Add your code below
+SQL> -- Updating Species table
+SQL> UPDATE SPECIES SET REDLIST_CODE = 'EN' 
+WHERE SPEC_GENUS = 'Hippopotamus' 
+AND SPEC_NAME = 'amphibius';
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set echo off

@@ -1,0 +1,17 @@
+SQL> -- Add your code below
+SQL> -- Alter Animal table
+SQL> ALTER TABLE ANIMAL 
+ADD animal_status char (01);
+
+Table ANIMAL altered.
+
+SQL> ALTER TABLE Animal ADD CONSTRAINT CHK_ANIMAL_STATUS
+CHECK (animal_status in ('D','A'));
+
+Table ANIMAL altered.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set echo off
