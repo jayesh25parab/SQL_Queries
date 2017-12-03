@@ -1,0 +1,412 @@
+SQL> CREATE TABLE CENTRE_TYPE (
+                ct_code CHAR(1) NOT NULL,
+                ct_description VARCHAR2(40) NOT NULL,
+                CONSTRAINT CENTRE_TYPE_PK PRIMARY KEY (ct_code)
+);
+
+Table CENTRE_TYPE created.
+
+SQL> COMMENT ON COLUMN CENTRE_TYPE.CT_Code IS 'Centre type code';
+
+Comment on column centre_type.ct_code 'CENTRE TYPE CODE' succeeded.
+
+SQL> COMMENT ON COLUMN CENTRE_TYPE.CT_Description IS 'Centre type description';
+
+Comment on column centre_type.ct_description 'CENTRE TYPE DESCRIPTION' succeeded.
+
+SQL> CREATE TABLE REDLIST_STATUS (
+                redlist_code CHAR(2) NOT NULL,
+                redlist_category VARCHAR2(40) NOT NULL,
+                CONSTRAINT REDLIST_STATUS_PK PRIMARY KEY (redlist_code)
+);
+
+Table REDLIST_STATUS created.
+
+SQL> COMMENT ON COLUMN REDLIST_STATUS.REDLIST_Code IS 'REDList code from http://www.iucnredlist.org/ for species';
+
+Comment on column redlist_status.redlist_code 'REDLIST CODE FROM HTTP://WWW.IUCNREDLIST.ORG/ FOR SPECIES' succeeded.
+
+SQL> COMMENT ON COLUMN REDLIST_STATUS.REDLIST_Category IS 'Description of redlist code';
+
+Comment on column redlist_status.redlist_category 'DESCRIPTION OF REDLIST CODE' succeeded.
+
+SQL> CREATE TABLE EXCHANGE_TYPE (
+                et_code CHAR(1) NOT NULL,
+                et_description VARCHAR2(40) NOT NULL,
+                CONSTRAINT EXCHANGE_TYPE_PK PRIMARY KEY (et_code)
+);
+
+Table EXCHANGE_TYPE created.
+
+SQL> COMMENT ON COLUMN EXCHANGE_TYPE.ET_Code IS 'Exchange type code';
+
+Comment on column exchange_type.et_code 'EXCHANGE TYPE CODE' succeeded.
+
+SQL> COMMENT ON COLUMN EXCHANGE_TYPE.ET_Description IS 'Exchange type description';
+
+Comment on column exchange_type.et_description 'EXCHANGE TYPE DESCRIPTION' succeeded.
+
+SQL> CREATE TABLE GRANT_TYPE (
+                gt_code CHAR(1) NOT NULL,
+                gt_description VARCHAR2(40) NOT NULL,
+                CONSTRAINT GRANT_TYPE_PK PRIMARY KEY (gt_code)
+);
+
+Table GRANT_TYPE created.
+
+SQL> COMMENT ON COLUMN GRANT_TYPE.GT_Code IS 'Grant type code';
+
+Comment on column grant_type.gt_code 'GRANT TYPE CODE' succeeded.
+
+SQL> COMMENT ON COLUMN GRANT_TYPE.GT_Description IS 'Grant type description';
+
+Comment on column grant_type.gt_description 'GRANT TYPE DESCRIPTION' succeeded.
+
+SQL> CREATE TABLE CONSERVATION_AGENCY (
+                ca_code NUMBER(4,0) NOT NULL,
+                ca_agency_name VARCHAR2(50) NOT NULL,
+                ca_phone_no VARCHAR2(20) NOT NULL,
+                ca_address VARCHAR2(100) NOT NULL,
+                ca_type CHAR(1) NOT NULL
+                     CONSTRAINT CA_TYPE_CHECK CHECK (ca_type in ('I','N')),
+                CONSTRAINT CONSERVATION_AGENCY_PK PRIMARY KEY (ca_code)
+);
+
+Table CONSERVATION_AGENCY created.
+
+SQL> COMMENT ON COLUMN CONSERVATION_AGENCY.CA_Code IS 'Unique identifier for Conservation Agency';
+
+Comment on column conservation_agency.ca_code 'UNIQUE IDENTIFIER FOR CONSERVATION AGENCY' succeeded.
+
+SQL> COMMENT ON COLUMN CONSERVATION_AGENCY.CA_Agency_name IS 'Conservation Agency name';
+
+Comment on column conservation_agency.ca_agency_name 'CONSERVATION AGENCY NAME' succeeded.
+
+SQL> COMMENT ON COLUMN CONSERVATION_AGENCY.CA_Phone_no IS 'Conservation Agency contact phone number';
+
+Comment on column conservation_agency.ca_phone_no 'CONSERVATION AGENCY CONTACT PHONE NUMBER' succeeded.
+
+SQL> COMMENT ON COLUMN CONSERVATION_AGENCY.CA_Address IS 'Conservation Agency address';
+
+Comment on column conservation_agency.ca_address 'CONSERVATION AGENCY ADDRESS' succeeded.
+
+SQL> COMMENT ON COLUMN CONSERVATION_AGENCY.CA_Type IS 'Conservation Agency type N or I - National or International';
+
+Comment on column conservation_agency.ca_type 'CONSERVATION AGENCY TYPE N OR I - NATIONAL OR INTERNATIONAL' succeeded.
+
+SQL> CREATE TABLE Centre (
+                centre_id CHAR(6) NOT NULL,
+                centre_name VARCHAR2(40) NOT NULL,
+                centre_address VARCHAR2(100) NOT NULL,
+                centre_director VARCHAR2(30) NOT NULL,
+                centre_phone_no VARCHAR2(20) NOT NULL,
+                ct_code CHAR(1) NOT NULL,
+                CONSTRAINT CENTRE_PK PRIMARY KEY (centre_id)
+);
+
+Table CENTRE created.
+
+SQL> COMMENT ON COLUMN Centre.Centre_ID IS 'Unique identifier for Centre';
+
+Comment on column centre.centre_id 'UNIQUE IDENTIFIER FOR CENTRE' succeeded.
+
+SQL> COMMENT ON COLUMN Centre.Centre_name IS 'Name of Centre';
+
+Comment on column centre.centre_name 'NAME OF CENTRE' succeeded.
+
+SQL> COMMENT ON COLUMN Centre.Centre_Address IS 'Centre address';
+
+Comment on column centre.centre_address 'CENTRE ADDRESS' succeeded.
+
+SQL> COMMENT ON COLUMN Centre.Centre_Director IS 'Name of director of centre';
+
+Comment on column centre.centre_director 'NAME OF DIRECTOR OF CENTRE' succeeded.
+
+SQL> COMMENT ON COLUMN Centre.Centre_phone_no IS 'Centre phone contact number';
+
+Comment on column centre.centre_phone_no 'CENTRE PHONE CONTACT NUMBER' succeeded.
+
+SQL> COMMENT ON COLUMN Centre.CT_Code IS 'Centre type code';
+
+Comment on column centre.ct_code 'CENTRE TYPE CODE' succeeded.
+
+SQL> CREATE TABLE GRANTS (
+                grant_id NUMBER(5,0) NOT NULL,
+                grant_amount NUMBER(10,2) NOT NULL,
+                ca_code NUMBER(4,0) NOT NULL,
+                centre_id CHAR(6) NOT NULL,
+                gt_code CHAR(1) NOT NULL,
+                CONSTRAINT GRANTS_PK PRIMARY KEY (grant_id)
+);
+
+Table GRANTS created.
+
+SQL> COMMENT ON COLUMN GRANTS.Grant_ID IS 'Unique identifier for grant';
+
+Comment on column grants.grant_id 'UNIQUE IDENTIFIER FOR GRANT' succeeded.
+
+SQL> COMMENT ON COLUMN GRANTS.Grant_Amount IS 'Amount $''s of grant';
+
+Comment on column grants.grant_amount 'AMOUNT $''S OF GRANT' succeeded.
+
+SQL> COMMENT ON COLUMN GRANTS.CA_Code IS 'Conservation agency code which made grant';
+
+Comment on column grants.ca_code 'CONSERVATION AGENCY CODE WHICH MADE GRANT' succeeded.
+
+SQL> COMMENT ON COLUMN GRANTS.Centre_ID IS 'ID of centre receiving grant';
+
+Comment on column grants.centre_id 'ID OF CENTRE RECEIVING GRANT' succeeded.
+
+SQL> COMMENT ON COLUMN GRANTS.GT_Code IS 'Grant type code';
+
+Comment on column grants.gt_code 'GRANT TYPE CODE' succeeded.
+
+SQL> CREATE TABLE Species (
+                spec_genus VARCHAR2(20) NOT NULL,
+                spec_name VARCHAR2(20) NOT NULL,
+                spec_popular_name VARCHAR2(40) NOT NULL,
+                spec_family VARCHAR2(20) NOT NULL,
+                spec_natural_range VARCHAR2(100) NOT NULL,
+                Spec_REDLIST_URL VARCHAR2(80) NOT NULL,
+                redlist_code CHAR(2) NOT NULL,
+                CONSTRAINT SPECIES_PK PRIMARY KEY (spec_genus, spec_name)
+);
+
+Table SPECIES created.
+
+SQL> COMMENT ON COLUMN Species.Spec_Genus IS 'Species genus';
+
+Comment on column species.spec_genus 'SPECIES GENUS' succeeded.
+
+SQL> COMMENT ON COLUMN Species.Spec_Name IS 'Name of species';
+
+Comment on column species.spec_name 'NAME OF SPECIES' succeeded.
+
+SQL> COMMENT ON COLUMN Species.Spec_Popular_Name IS 'Species popular name';
+
+Comment on column species.spec_popular_name 'SPECIES POPULAR NAME' succeeded.
+
+SQL> COMMENT ON COLUMN Species.Spec_Family IS 'species family';
+
+Comment on column species.spec_family 'SPECIES FAMILY' succeeded.
+
+SQL> COMMENT ON COLUMN Species.Spec_Natural_range IS 'Description of natural range of species';
+
+Comment on column species.spec_natural_range 'DESCRIPTION OF NATURAL RANGE OF SPECIES' succeeded.
+
+SQL> COMMENT ON COLUMN Species.Spec_REDLIST_URL IS 'URL from http://www.iucnredlist.org/ representing this species';
+
+Comment on column species.spec_redlist_url 'URL FROM HTTP://WWW.IUCNREDLIST.ORG/ REPRESENTING THIS SPECIES' succeeded.
+
+SQL> COMMENT ON COLUMN Species.REDLIST_Code IS 'REDList code from http://www.iucnredlist.org/ for species';
+
+Comment on column species.redlist_code 'REDLIST CODE FROM HTTP://WWW.IUCNREDLIST.ORG/ FOR SPECIES' succeeded.
+
+SQL> CREATE TABLE Exchange (
+                exchange_no NUMBER(6,0) NOT NULL,
+                exchange_date DATE NOT NULL,
+                exchange_from_centre_id CHAR(6) NOT NULL,
+                exchange_to_centre_id CHAR(6) NOT NULL,
+                animal_id NUMBER(6,0) NOT NULL,
+                et_code CHAR(1) NOT NULL,
+                CONSTRAINT EXCHANGE_PK PRIMARY KEY (exchange_no)
+);
+
+Table EXCHANGE created.
+
+SQL> COMMENT ON COLUMN Exchange.Exchange_no IS 'Unique identifier for animal exchange';
+
+Comment on column exchange.exchange_no 'UNIQUE IDENTIFIER FOR ANIMAL EXCHANGE' succeeded.
+
+SQL> COMMENT ON COLUMN Exchange.Exchange_date IS 'Date of exchange (no time recorded, only day, month, year)';
+
+Comment on column exchange.exchange_date 'DATE OF EXCHANGE NO TIME RECORDED, ONLY DAY, MONTH, YEAR)' succeeded.
+
+SQL> COMMENT ON COLUMN Exchange.Exchange_From_Centre_ID IS 'ID of centre where the animal comes from';
+
+Comment on column exchange.exchange_from_centre_id 'ID OF CENTRE WHERE THE ANIMAL COMES FROM' succeeded.
+
+SQL> COMMENT ON COLUMN Exchange.Exchange_To_Centre_ID IS 'ID of destination centre for exchange (centre going to)';
+
+Comment on column exchange.exchange_to_centre_id 'ID OF DESTINATION CENTRE FOR EXCHANGE CENTRE GOING TO)' succeeded.
+
+SQL> COMMENT ON COLUMN Exchange.Animal_ID IS 'ID of animal involved in exchange';
+
+Comment on column exchange.animal_id 'ID OF ANIMAL INVOLVED IN EXCHANGE' succeeded.
+
+SQL> COMMENT ON COLUMN Exchange.ET_Code IS 'Exchange type code';
+
+Comment on column exchange.et_code 'EXCHANGE TYPE CODE' succeeded.
+
+SQL> ALTER TABLE Centre ADD CONSTRAINT CENTRE_TYPE_CENTRE_FK
+FOREIGN KEY (ct_code)
+REFERENCES CENTRE_TYPE (ct_code)
+NOT DEFERRABLE;
+
+Table CENTRE altered.
+
+SQL> ALTER TABLE Species ADD CONSTRAINT REDLIST_STATUS_SPECIES_FK
+FOREIGN KEY (redlist_code)
+REFERENCES REDLIST_STATUS (redlist_code)
+NOT DEFERRABLE;
+
+Table SPECIES altered.
+
+SQL> ALTER TABLE GRANTS ADD CONSTRAINT GRANT_TYPE_GRANT_FK
+FOREIGN KEY (gt_code)
+REFERENCES GRANT_TYPE (gt_code)
+NOT DEFERRABLE;
+
+Table GRANTS altered.
+
+SQL> ALTER TABLE GRANTS ADD CONSTRAINT CA_GRANT_FK
+FOREIGN KEY (ca_code)
+REFERENCES CONSERVATION_AGENCY (ca_code)
+NOT DEFERRABLE;
+
+Table GRANTS altered.
+
+SQL> ALTER TABLE GRANTS ADD CONSTRAINT CENTRE_GRANT_FK
+FOREIGN KEY (centre_id)
+REFERENCES Centre (centre_id)
+NOT DEFERRABLE;
+
+Table GRANTS altered.
+
+SQL> ALTER TABLE Exchange ADD CONSTRAINT CENTRE_EXCHANGEFROM_FK
+FOREIGN KEY (exchange_from_centre_id)
+REFERENCES Centre (centre_id)
+NOT DEFERRABLE;
+
+Table EXCHANGE altered.
+
+SQL> ALTER TABLE Exchange ADD CONSTRAINT CENTRE_EXCHANGETO_FK
+FOREIGN KEY (exchange_to_centre_id)
+REFERENCES Centre (centre_id)
+NOT DEFERRABLE;
+
+Table EXCHANGE altered.
+
+SQL> ALTER TABLE Exchange ADD CONSTRAINT EXCHANGE_TYPE_EXCHANGE_FK
+FOREIGN KEY (et_code)
+REFERENCES EXCHANGE_TYPE (et_code)
+NOT DEFERRABLE;
+
+Table EXCHANGE altered.
+
+SQL> -- Add your code below to add the missing create table statements and the associated constraints. 
+SQL> CREATE TABLE Animal (
+                animal_id NUMBER (6,0) NOT NULL,
+                animal_sex CHAR (1) NOT NULL,
+                brevent_id NUMBER (6,0),
+                centre_id CHAR (6) NOT NULL,
+                spec_genus VARCHAR2 (20) NOT NULL,
+                spec_name VARCHAR2 (20) NOT NULL,
+                CONSTRAINT ANIMAL_PK PRIMARY KEY (animal_id)
+);
+
+Table ANIMAL created.
+
+SQL> COMMENT ON COLUMN Animal.Animal_id IS 'Unique identifier for animal';
+
+Comment on column animal.animal_id 'UNIQUE IDENTIFIER FOR ANIMAL' succeeded.
+
+SQL> COMMENT ON COLUMN Animal.Animal_sex IS 'Sex of animal';
+
+Comment on column animal.animal_sex 'SEX OF ANIMAL' succeeded.
+
+SQL> COMMENT ON COLUMN Animal.Brevent_id IS 'ID for breeding event';
+
+Comment on column animal.brevent_id 'ID FOR BREEDING EVENT' succeeded.
+
+SQL> COMMENT ON COLUMN Animal.centre_id IS 'Unique identifier for center';
+
+Comment on column animal.centre_id 'UNIQUE IDENTIFIER FOR CENTER' succeeded.
+
+SQL> COMMENT ON COLUMN Animal.spec_genus IS 'Species Genus';
+
+Comment on column animal.spec_genus 'SPECIES GENUS' succeeded.
+
+SQL> COMMENT ON COLUMN Animal.spec_name IS 'Name of Species';
+
+Comment on column animal.spec_name 'NAME OF SPECIES' succeeded.
+
+SQL> CREATE TABLE BREEDING_EVENT (
+                brevent_id NUMBER (6,0) NOT NULL,
+                brevent_date DATE NOT NULL,
+                centre_id CHAR(6) NOT NULL,
+                brevent_father_id NUMBER (6,0) NOT NULL,
+                brevent_mother_id NUMBER (6,0) NOT NULL,
+                CONSTRAINT BREEDING_EVENT_PK PRIMARY KEY (brevent_id)
+);
+
+Table BREEDING_EVENT created.
+
+SQL> COMMENT ON COLUMN BREEDING_EVENT.Brevent_id IS 'UNIQUE identifier for breeding event';
+
+Comment on column breeding_event.brevent_id 'UNIQUE IDENTIFIER FOR BREEDING EVENT' succeeded.
+
+SQL> COMMENT ON COLUMN BREEDING_EVENT.Brevent_date IS 'Date on which breeding took place';
+
+Comment on column breeding_event.brevent_date 'DATE ON WHICH BREEDING TOOK PLACE' succeeded.
+
+SQL> COMMENT ON COLUMN BREEDING_EVENT.Centre_id IS 'ID of centre where breeding took plece';
+
+Comment on column breeding_event.centre_id 'ID OF CENTRE WHERE BREEDING TOOK PLECE' succeeded.
+
+SQL> COMMENT ON COLUMN BREEDING_EVENT.Brevent_father_id IS 'ID of male animal used for breeding';
+
+Comment on column breeding_event.brevent_father_id 'ID OF MALE ANIMAL USED FOR BREEDING' succeeded.
+
+SQL> COMMENT ON COLUMN BREEDING_EVENT.Brevent_mother_id IS 'ID of female animal used for breeding';
+
+Comment on column breeding_event.brevent_mother_id 'ID OF FEMALE ANIMAL USED FOR BREEDING' succeeded.
+
+SQL> ALTER TABLE Animal ADD CONSTRAINT SPECIES_ANIMAL_FK
+FOREIGN KEY (spec_genus,spec_name)
+REFERENCES Species (spec_genus,spec_name)
+NOT DEFERRABLE;
+
+Table ANIMAL altered.
+
+SQL> ALTER TABLE Animal ADD CONSTRAINT CENTRE_ANIMAL_FK
+FOREIGN KEY (centre_id)
+REFERENCES Centre (centre_id)
+NOT DEFERRABLE;
+
+Table ANIMAL altered.
+
+SQL> ALTER TABLE Animal ADD CONSTRAINT BREEDING_EVENT_ANIMAL_FK
+FOREIGN KEY (brevent_id)
+REFERENCES BREEDING_EVENT (brevent_id)
+NOT DEFERRABLE;
+
+Table ANIMAL altered.
+
+SQL> ALTER TABLE Animal ADD CONSTRAINT CHK_ANIMAL_SEX
+CHECK (animal_sex in ('M','F'));
+
+Table ANIMAL altered.
+
+SQL> ALTER TABLE BREEDING_EVENT ADD CONSTRAINT Centre_BREEDING_EVENT_FK
+FOREIGN KEY (centre_id)
+REFERENCES Centre (centre_id)
+NOT DEFERRABLE;
+
+Table BREEDING_EVENT altered.
+
+SQL> ALTER TABLE BREEDING_EVENT ADD CONSTRAINT Animal_BREEDING_EVENT_FK
+FOREIGN KEY (brevent_father_id)
+REFERENCES Animal (animal_id)
+NOT DEFERRABLE;
+
+Table BREEDING_EVENT altered.
+
+SQL> ALTER TABLE BREEDING_EVENT ADD CONSTRAINT Animal_BREEDING_EVENT_FK1
+FOREIGN KEY (brevent_mother_id)
+REFERENCES Animal (animal_id)
+NOT DEFERRABLE;
+
+Table BREEDING_EVENT altered.
+
+SQL> set echo off

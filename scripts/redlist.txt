@@ -1,0 +1,8 @@
+SQL> -- Add your code below
+SQL> UPDATE SPECIES SET REDLIST_CODE = 'EN' 
+WHERE SPEC_GENUS = 'Hippopotamus' 
+AND SPEC_NAME = 'amphibius';
+
+1 row updated.
+
+SQL> set echo off

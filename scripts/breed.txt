@@ -1,0 +1,9 @@
+SQL> -- Add your code below
+SQL> INSERT INTO BREEDING_EVENT
+VALUES (breeding_event_seq.NEXTVAL,to_date('01-Aug-2014'),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo'),
+000016,000009);
+
+1 row inserted.
+
+SQL> set echo off

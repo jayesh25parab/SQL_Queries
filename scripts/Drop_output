@@ -1,0 +1,59 @@
+SQL> -- Conservation Drop Tables
+SQL> drop table BREEDING_EVENT cascade constraints purge;
+
+Table BREEDING_EVENT dropped.
+
+SQL> drop table EXCHANGE cascade constraints purge;
+
+Table EXCHANGE dropped.
+
+SQL> drop table ANIMAL cascade constraints purge;
+
+Table ANIMAL dropped.
+
+SQL> drop table SPECIES cascade constraints purge;
+
+Table SPECIES dropped.
+
+SQL> drop table GRANTS cascade constraints purge;
+
+Table GRANTS dropped.
+
+SQL> drop table CENTRE cascade constraints purge;
+
+Table CENTRE dropped.
+
+SQL> drop table CONSERVATION_AGENCY cascade constraints purge;
+
+Table CONSERVATION_AGENCY dropped.
+
+SQL> drop table GRANT_TYPE cascade constraints purge;
+
+Table GRANT_TYPE dropped.
+
+SQL> drop table EXCHANGE_TYPE cascade constraints purge;
+
+Table EXCHANGE_TYPE dropped.
+
+SQL> drop table REDLIST_STATUS cascade constraints purge;
+
+Table REDLIST_STATUS dropped.
+
+SQL> drop table CENTRE_TYPE cascade constraints purge;
+
+Table CENTRE_TYPE dropped.
+
+SQL> -- Conservation Drop Sequences
+SQL> DROP SEQUENCE animal_seq;
+
+Sequence ANIMAL_SEQ dropped.
+
+SQL> DROP SEQUENCE breeding_event_seq;
+
+Sequence BREEDING_EVENT_SEQ dropped.
+
+SQL> DROP SEQUENCE exchange_seq;
+
+Sequence EXCHANGE_SEQ dropped.
+
+SQL> set echo off

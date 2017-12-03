@@ -1,0 +1,10 @@
+SQL> -- Add your code below
+SQL> INSERT INTO EXCHANGE 
+VALUES (exchange_seq.NEXTVAL,to_date('03-MAR-2014'),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME ='Kruger National Park'),
+(SELECT CENTRE_ID FROM CENTRE WHERE CENTRE_NAME = 'Werribee Open Range Zoo'),
+000016,'B');
+
+1 row inserted.
+
+SQL> set echo off
